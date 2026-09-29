@@ -1,0 +1,31 @@
+﻿@model SimpleCalc.Models.CalculatorModel
+
+@{
+    ViewData["Title"] = "Калькулятор";
+}
+
+<h2>Калькулятор</h2>
+
+<form method="post">
+    <input type="number" step="any" name="Num1" value="@Model.Num1" required />
+
+    <select name="Operation" required>
+        <option value="+" selected="@(Model.Operation == "+")">+</option>
+        <option value="-" selected="@(Model.Operation == "-")">-</option>
+        <option value="*" selected="@(Model.Operation == "*")">*</option>
+        <option value="/" selected="@(Model.Operation == "/")">/</option>
+    </select>
+
+    <input type="number" step="any" name="Num2" value="@Model.Num2" required />
+
+    <button type="submit">=</button>
+
+    @if (Model.Result.HasValue)
+    {
+        <strong>@Model.Result</strong>
+    }
+    else if (Model.Operation == "/" && Model.Num2 == 0)
+    {
+        <strong>Деление на ноль!</strong>
+    }
+</form>
