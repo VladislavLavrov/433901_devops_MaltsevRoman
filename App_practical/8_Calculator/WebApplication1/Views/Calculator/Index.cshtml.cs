@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace _8_calculator.Views.Calculator
+namespace WebApplication1.Views.Calculator
 {
     public class IndexModel : PageModel
     {
