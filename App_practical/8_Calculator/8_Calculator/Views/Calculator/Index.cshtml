@@ -142,6 +142,13 @@
             </div>
         }
 
+        @if (ViewBag.Message != null)
+        {
+            <div class="result">
+                @ViewBag.Message
+            </div>
+        }
+
         @if (ViewBag.Error != null)
         {
             <div class="error">

@@ -1,9 +1,20 @@
 ﻿using Calculator.Data;
 using Microsoft.EntityFrameworkCore;
+using Calculator.Services;
+using Confluent.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+
+builder.Services.AddSingleton<KafkaProducerHandler>();
+
+builder.Services.AddSingleton<
+    KafkaProducerService<Null, string>
+>();
+
+builder.Services.AddHostedService<KafkaConsumerService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Не задана строка подключения DefaultConnection.");
