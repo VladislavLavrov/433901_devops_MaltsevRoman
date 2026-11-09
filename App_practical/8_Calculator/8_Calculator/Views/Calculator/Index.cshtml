@@ -1,162 +1,70 @@
-﻿@{
-    ViewData["Title"] = "Simple Calculator";
+﻿@model _8_Calculator.Models.CalculatorViewModel
+
+@{
+    ViewData["Title"] = "Калькулятор";
 }
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Калькулятор 8</h3>
+                </div>
 
-    <title>@ViewData["Title"]</title>
+                <div class="card-body">
+                    <form asp-controller="Calculator"
+                          asp-action="Calculate"
+                          method="post">
 
-    <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f2f2f2;
-                margin: 0;
-                padding: 40px;
-            }
+                        <div class="mb-3">
+                            <label class="form-label">Первое число</label>
+                            <input asp-for="Number1"
+                                   type="number"
+                                   step="any"
+                                   class="form-control"
+                                   required />
+                        </div>
 
-            .calculator {
-                width: 400px;
-                margin: 0 auto;
-                padding: 30px;
-                background-color: white;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            }
+                        <div class="mb-3">
+                            <label class="form-label">Операция</label>
+                            <select asp-for="Operation" class="form-select">
+                                <option value="Add">Сложение (+)</option>
+                                <option value="Subtract">Вычитание (-)</option>
+                                <option value="Multiply">Умножение (*)</option>
+                                <option value="Divide">Деление (/)</option>
+                            </select>
+                        </div>
 
-            h1 {
-                text-align: center;
-                margin-bottom: 25px;
-            }
+                        <div class="mb-3">
+                            <label class="form-label">Второе число</label>
+                            <input asp-for="Number2"
+                                   type="number"
+                                   step="any"
+                                   class="form-control"
+                                   required />
+                        </div>
 
-            .form-group {
-                margin-bottom: 15px;
-            }
+                        <button type="submit" class="btn btn-primary w-100">
+                            Вычислить
+                        </button>
+                    </form>
 
-            label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
+                    @if (Model.Result != null)
+                    {
+                        <div class="alert alert-success mt-4">
+                            <h5>Результат: @Model.Result</h5>
+                        </div>
+                    }
 
-            input,
-            select {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 10px;
-                font-size: 16px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-
-            button {
-                width: 100%;
-                padding: 12px;
-                margin-top: 10px;
-                font-size: 16px;
-                color: white;
-                background-color: #007bff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            button:hover {
-                background-color: #0056b3;
-            }
-
-            .result {
-                margin-top: 20px;
-                padding: 15px;
-                background-color: #e8f5e9;
-                border-radius: 5px;
-                text-align: center;
-                font-size: 20px;
-            }
-
-            .error {
-                margin-top: 20px;
-                padding: 15px;
-                background-color: #ffebee;
-                color: #c62828;
-                border-radius: 5px;
-                text-align: center;
-            }
-    </style>
-</head>
-
-<body>
-
-    <div class="calculator">
-
-        <h1> Крутой Калькулятор</h1>
-
-        <form asp-controller="Calculator"
-              asp-action="Calculate"
-              method="post">
-
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                <label for="num1">Первое число:</label>
-                <input type="number"
-                       id="num1"
-                       name="num1"
-                       step="any"
-                       required />
+                    @if (!string.IsNullOrEmpty(Model.Error))
+                    {
+                        <div class="alert alert-danger mt-4">
+                            @Model.Error
+                        </div>
+                    }
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="num2">Второе число:</label>
-                <input type="number"
-                       id="num2"
-                       name="num2"
-                       step="any"
-                       required />
-            </div>
-
-            <div class="form-group">
-                <label for="operation">Операция:</label>
-
-                <select id="operation" name="operation">
-                    <option value="Add">+</option>
-                    <option value="Subtract">-</option>
-                    <option value="Multiply">*</option>
-                    <option value="Divide">/</option>
-                </select>
-            </div>
-
-            <button type="submit">
-                Вычислить
-            </button>
-
-        </form>
-
-        @if (ViewBag.Result != null)
-        {
-            <div class="result">
-                <strong>Результат: @ViewBag.Result</strong>
-            </div>
-        }
-
-        @if (ViewBag.Message != null)
-        {
-            <div class="result">
-                @ViewBag.Message
-            </div>
-        }
-
-        @if (ViewBag.Error != null)
-        {
-            <div class="error">
-                @ViewBag.Error
-            </div>
-        }
-
+        </div>
     </div>
-
-</body>
-</html>
+</div>
