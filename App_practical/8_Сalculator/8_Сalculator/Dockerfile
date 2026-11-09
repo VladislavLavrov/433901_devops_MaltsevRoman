@@ -33,4 +33,4 @@ COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:5008
 
 # Запуск приложения
-ENTRYPOINT ["dotnet", "8_Calculator.dll"]
+ENTRYPOINT ["dotnet", "8_Calculator.dll"]s

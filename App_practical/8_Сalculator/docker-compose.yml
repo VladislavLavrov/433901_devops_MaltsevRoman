@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: 8_Calculator/Dockerfile
+    container_name: 8-calculator
+    ports:
+      - "6008:5008"
+    restart: unless-stopped

@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>_8_Calculator</RootNamespace>
+    <RootNamespace>_8_Сalculator</RootNamespace>
   </PropertyGroup>
 
 </Project>
